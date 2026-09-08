@@ -1,0 +1,35 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node and frontend builds
+node_modules/
+frontend/dist/
+coverage/
+
+# IDE and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Runtime output
+*.log
+.cache/
+data/exports/
+
+# Generated document intermediates (existing source artifacts are preserved)
+abstract_render/
+output/
+tmp/
+

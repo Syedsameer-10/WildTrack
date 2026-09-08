@@ -1,0 +1,59 @@
+.database-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 11px;
+  border: 1px solid #563d35;
+  border-radius: 6px;
+  color: #ba8d7f;
+  font: 500 0.62rem "DM Mono", monospace;
+}
+
+.database-chip.ready {
+  border-color: #345942;
+  color: #b6e55c;
+}
+
+.database-chip strong {
+  color: #8fa39a;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+.database-chip span {
+  white-space: nowrap;
+}
+
+.map-panel { position: relative; min-height: 510px; width: 100%; overflow: hidden; border: 1px solid #29483d; border-radius: 18px; background: #0b261e; box-shadow: 0 30px 100px rgba(0, 0, 0, .24); }
+.map-header { position: absolute; z-index: 2; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border: 1px solid rgba(213, 255, 137, .24); border-radius: 10px; background: rgba(7, 23, 19, .88); backdrop-filter: blur(8px); }
+.map-header div { display: grid; gap: 3px; }
+.map-kicker { color: #a5c78c; font: 500 .58rem "DM Mono", monospace; letter-spacing: .11em; }
+.map-header strong { font-size: .86rem; }
+.map-live { color: #071713; background: #b6e55c; border-radius: 5px; padding: 5px 7px; font: 600 .58rem "DM Mono", monospace; letter-spacing: .08em; }
+.map-canvas { width: 100%; height: 510px; }
+.map-query { position: absolute; z-index: 2; left: 16px; bottom: 43px; display: grid; gap: 3px; max-width: calc(100% - 32px); padding: 10px 12px; border: 1px solid rgba(217, 255, 137, .24); border-radius: 8px; background: rgba(7, 23, 19, .9); pointer-events: none; }
+.map-query strong { color: #f0f7ef; font-size: .78rem; }
+.map-query span { color: #a7bbb0; font: .62rem "DM Mono", monospace; }
+.map-query.inside { border-color: rgba(182, 229, 92, .7); }
+.map-note { position: absolute; z-index: 2; left: 16px; bottom: 4px; margin: 0; color: #cbdbc7; font: .6rem "DM Mono", monospace; background: rgba(7, 23, 19, .85); padding: 7px 9px; border-radius: 5px; }
+.maplibregl-ctrl-attrib { font: 10px "DM Mono", monospace !important; }
+.maplibregl-ctrl-attrib a { color: #315b44 !important; }
+
+@media (max-width: 520px) {
+  .database-chip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .map-panel { min-height: 390px; }
+  .map-canvas { height: 390px; }
+  .map-header { top: 10px; left: 10px; right: 10px; }
+  .map-query { left: 10px; bottom: 40px; max-width: calc(100% - 20px); }
+  .map-note { left: 10px; font-size: .52rem; }
+}
+
+@media (min-width: 521px) and (max-width: 850px) {
+  .map-panel { max-width: 640px; justify-self: center; }
+  .map-canvas { height: 430px; }
+}
