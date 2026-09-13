@@ -5,6 +5,7 @@ import "./styles.css";
 import "./database-status.css";
 import "./temporal.css";
 import "./events.css";
+import "./login.css";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("WildTrack could not find its root element.");
