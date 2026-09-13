@@ -1,0 +1,8 @@
+import type { AlertFeed, EventFeed } from "./api";
+
+function displayTime(value: string) { return new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); }
+
+export function AlertPanel({ feed, events }: { feed: AlertFeed | null; events: EventFeed | null }) {
+  if (!feed) return <section className="alert-panel"><p className="eyebrow">ACTIVE RULES · ECA</p><p className="event-empty">Alert feed is temporarily unavailable. The event and temporal feeds remain available.</p></section>;
+  return <section className="alert-panel" aria-labelledby="alerts-title"><div className="alert-heading"><div><p className="eyebrow">ACTIVE RULES · ECA</p><h2 id="alerts-title">Generated alerts</h2></div><span className="alert-count">{feed.count} active</span></div>{feed.alerts.length === 0 ? <p className="event-empty">No rules have fired yet.</p> : <div className="alert-list">{feed.alerts.map((alert) => { const event = events?.events.find((item) => item.event_id === alert.event_id); return <article key={alert.id}><span className={`event-severity ${alert.severity}`} /><div><strong>{alert.message}</strong><small>Event {alert.event_id}</small>{event && <small>Occurred {displayTime(event.occurred_at)} · received {displayTime(event.received_at)}</small>}<span className="alert-links">{event?.zone_code && <a href={`#/map?zone=${encodeURIComponent(event.zone_code)}`}>View zone</a>}<a href={`#/temporal?event=${encodeURIComponent(alert.event_id)}`}>View temporal history</a></span></div><time dateTime={alert.created_at}>{displayTime(alert.created_at)}</time></article>; })}</div>}</section>;
+}

@@ -15,9 +15,6 @@ FastAPI application service
      v                    v
 Supabase PostgreSQL       MongoDB Atlas
 PostGIS + triggers        Event documents
-     ^
-     | aggregate writes
-Hive analytics worker
 ```
 
 The frontend never connects directly to either operational database during the pre-authentication phases. FastAPI owns validation, orchestration, and public API contracts.
@@ -31,10 +28,8 @@ The frontend never connects directly to either operational database during the p
 | Position history and validity periods | PostgreSQL | Temporal querying and constraints |
 | ECA rules and authoritative alerts | PostgreSQL triggers/tables | Transactional active-database behaviour |
 | Raw and enriched event payloads | MongoDB Atlas | Flexible event shapes |
-| Analytics outputs | PostgreSQL aggregate tables | Fast dashboard reads |
-| Batch processing | Hive | Historical analytical workloads |
 
-Data is not duplicated without an explicit ownership rule. An alert in PostgreSQL may reference an event document in MongoDB through a correlation ID; PostgreSQL remains authoritative for ranger workflow state.
+Data is not duplicated without an explicit ownership rule. An alert in PostgreSQL may reference an event document in MongoDB through a correlation ID; PostgreSQL remains authoritative for alert state.
 
 ## 3. Spatial contract
 
@@ -99,8 +94,6 @@ Example error:
 - Docker Compose is a local convenience, not an application dependency.
 - No code relies on Docker-only hostnames such as `db` or `mongo`.
 - Database schema changes run as an explicit migration step.
-- Long-running simulation and analytics work cannot block API requests.
-- Hive failure cannot interrupt live tracking or map reads.
 - Each service exposes health information suitable for cloud deployment.
 
 ## 8. Security boundaries
@@ -124,4 +117,3 @@ Example error:
 | Integration tests | Supabase, MongoDB and WebSocket flows |
 | UI tests | Critical user journeys and failure states |
 | Deployment smoke tests | Public frontend, API, map and hosted dependencies |
-

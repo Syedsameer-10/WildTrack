@@ -17,7 +17,7 @@ def test_health_is_independent_and_healthy() -> None:
 
 
 def test_versioned_status_contract() -> None:
-    response = client.get("/api/v1/status", headers={"X-Request-ID":"phase-one-test"})
+    response = client.get("/api/v1/status", headers={"X-Request-ID": "phase-one-test"})
     body = response.json()
     assert response.status_code == 200
     assert response.headers["X-Request-ID"] == "phase-one-test"
@@ -66,5 +66,11 @@ def test_spatial_area_api_has_a_separate_unavailable_state() -> None:
 
 def test_spatial_point_query_validates_coordinates() -> None:
     response = client.get("/api/v1/map/query?latitude=91&longitude=76.7")
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "request_validation_failed"
+
+
+def test_temporal_snapshot_validates_timestamp() -> None:
+    response = client.get("/api/v1/observations?as_of=not-a-timestamp")
     assert response.status_code == 422
     assert response.json()["error"]["code"] == "request_validation_failed"

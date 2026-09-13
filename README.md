@@ -11,11 +11,10 @@ Phase 1 provides a runnable React/TypeScript frontend and FastAPI backend with h
 | Responsibility | Technology |
 |---|---|
 | Web interface | React, TypeScript, Vite |
-| Interactive map | MapLibre GL JS with OpenFreeMap |
+| Interactive map | MapLibre GL JS with OpenStreetMap tiles |
 | API and live updates | FastAPI and WebSockets |
 | Relational, spatial, temporal, active data | Hosted Supabase PostgreSQL with PostGIS |
 | Flexible event documents | Hosted MongoDB Atlas |
-| Historical analytics | Apache Hive batch worker |
 | Authentication | Supabase Auth, added after core features |
 
 ## Repository layout
@@ -23,7 +22,6 @@ Phase 1 provides a runnable React/TypeScript frontend and FastAPI backend with h
 ```text
 frontend/                 Browser application
 backend/                  API and domain services
-analytics/                Hive batch pipeline
 database/migrations/      Versioned PostgreSQL changes
 database/seeds/           Repeatable demonstration data
 infrastructure/           Docker and deployment definitions
@@ -43,7 +41,6 @@ Copy `.env.example` to `.env` only when Phase 1 begins. Real credentials must ne
 - Hosted databases are used from their first implementation phase.
 - Database migrations are versioned and repeatable.
 - Spatial decisions are made by PostGIS, not by the map UI.
-- Hive is outside the live request path.
 - Docker images remain stateless and configured through environment variables.
 
 See [docs/architecture.md](docs/architecture.md), [docs/phase-gates.md](docs/phase-gates.md), and [infrastructure/phase-1.md](infrastructure/phase-1.md).
